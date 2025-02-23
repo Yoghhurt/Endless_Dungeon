@@ -26,3 +26,35 @@ void generateRooms(int numRooms) {
         rooms.push_back({roomX, roomY, roomWidth, roomHeight});
     }
 }
+
+private:
+    int width, height;
+    vector<vector<string>> grid;
+    vector<tuple<int, int, int, int>> rooms;  // (x, y, width, height)
+    pair<int, int> start, end;
+
+    int randInt(int min, int max) {
+        static random_device rd;
+        static mt19937 gen(rd());
+        uniform_int_distribution<> dis(min, max);
+        return dis(gen);
+    }
+
+    bool checkCollision(int x, int y, int width, int height) {
+        for (int i = x; i < x + width; i++) {
+            for (int j = y; j < y + height; j++) {
+                if (grid[j][i] != "wall") {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    void placeRoom(int x, int y, int width, int height) {
+        for (int i = x; i < x + width; i++) {
+            for (int j = y; j < y + height; j++) {
+                grid[j][i] = "room";
+            }
+        }
+    }
