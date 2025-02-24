@@ -86,7 +86,7 @@ public:
         int endX = std::rand() % WIDTH;
         int endY = std::rand() % HEIGHT;
 
-      
+
         while (dungeonGrid[startY][startX] != Empty) {
             startX = std::rand() % WIDTH;
             startY = std::rand() % HEIGHT;
@@ -102,3 +102,25 @@ public:
         dungeonGrid[endY][endX] = End;
     }
 };
+
+int main() {
+    Dungeon dungeon;
+
+    char input;
+    while (true) {
+        std::cout << "Press spacebar to generate a new dungeon (q to quit): ";
+        input = std::cin.get();
+        std::cin.ignore(); // To ignore the newline character
+
+        if (input == 'q') {
+            break;
+        }
+
+        if (input == ' ') {
+            dungeon.generate();
+            dungeon.printDungeon();
+        }
+    }
+
+    return 0;
+}
